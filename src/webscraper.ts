@@ -26,26 +26,17 @@ export default class WebScraper {
      * Gets and returns the price of the passed item from Amazon.
      * @param itemURL The item URL.
      */
-    public fetchItemPrice(itemURL: string): Promise<string[]> {
+    public fetchItemPrice(itemURL: string): Promise<string> {
         return new Promise((resolve, reject) => {
             this.axiosInstance.get(itemURL, { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0' } })
                 .then(
                     response => {
                         let $ = cheerio.load(response.data)
                         let price: Cheerio = $('#priceblock_ourprice')
-                        resolve([this.getFormattedDate(), price.text()])
+                        resolve(price.text())
                     }
                 )
                 .catch((error) => reject(error))
         })
-    }
-
-    /**
-     * Returns the current date in dd-MM-YYYY format.
-     * @returns the formatted date.
-     */
-    private getFormattedDate(): string {
-        const date = new Date()
-        return [date.getFullYear(), date.getMonth() + 1, date.getDate()].join('-')
     }
 }
