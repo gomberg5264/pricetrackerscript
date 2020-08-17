@@ -1,8 +1,8 @@
-import WebScraper from './webscraper'
-import { firebaseConfig } from './firebase_config'
 import firebase from 'firebase/app'
-
-const webScraper = new WebScraper()
+import { firebaseConfig } from './firebase_config'
+import FirebaseConnector from './firebase_connector'
 
 firebase.initializeApp(firebaseConfig)
-const database = firebase.database()
+
+const firebaseConnector = new FirebaseConnector()
+FirebaseConnector.getInstance().writeItemData('samsung-ultrawide-gaming-monitor')
