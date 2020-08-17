@@ -9,5 +9,5 @@ src/firebase_config.ts
 .firebaserc
 firebase-debug.log
 
-# generated javascript
-build/*.js
+# generated
+build/
