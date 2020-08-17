@@ -1,0 +1,13 @@
+# node modules
+node_modules/
+
+# configuration
+.env
+src/firebase_config.ts
+
+# firebase related
+.firebaserc
+firebase-debug.log
+
+# generated javascript
+build/*.js
