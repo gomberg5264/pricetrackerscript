@@ -22,6 +22,8 @@ export default class FirebaseConnector {
     public static getInstance(): FirebaseConnector {
         return FirebaseConnector.instance
     }
+    
+    // TODO: Write method that automatically fetches all prices of all items in the database and adds these values to the respective data tabs.
 
     /**
      * Appends the price and date (both at the time of execution) to the data tab of the passed item in the database.
@@ -44,6 +46,8 @@ export default class FirebaseConnector {
      * (since Firebase does not allow to push empty JSON maps :c.)
      * @param jsonItemName name of the new item.
      * @param itemUrl the url to the new item.
+     * 
+     * TODO: Fix the reject-resolve-chaos in this method.
      */
     public addItemToTrackingList(jsonItemName: string, itemUrl: string): Promise<string> {
         return new Promise((resolve, reject) => {
@@ -54,7 +58,6 @@ export default class FirebaseConnector {
                 }
                 this.firebaseDatabase.ref(`tracked-items`).child(jsonItemName)
                     .child('url').set(itemUrl)
-                    .then(() => resolve('Item has been added to the database successfully!'))
                     .catch((error) => reject(error))
                 this.writeItemData(jsonItemName)
                     .then((confirm) => resolve(confirm))
