@@ -27,19 +27,23 @@ export default class FirebaseConnector {
      * Appends the price and date (both at the time of execution) to the data tab of the passed item in the database.
      * @param jsonItemName the item's name in the database.
      */
-    public writeItemData(jsonItemName: string): void {
-        this.getItemUrl(jsonItemName).then((url: string) => {
-            this.webScraper.fetchItemPrice(url).then((price) => {
-                this.firebaseDatabase.ref(`tracked-items/${jsonItemName}/data`).child(this.getFormattedDate()).set(price)
+    public writeItemData(jsonItemName: string) {
+        return new Promise((resolve, reject) => {
+            this.getItemUrl(jsonItemName).then((url: string) => {
+                this.webScraper.fetchItemPrice(url).then((price) => {
+                    this.firebaseDatabase.ref(`tracked-items/${jsonItemName}/data`).child(this.getFormattedDate()).set(price)
+                    resolve('Data successfully saved to database!')
+                })
             })
+            .catch((error) => reject(error))
         })
     }
 
     /**
-     * Gets the Amazon url to the passed item.
+     * Gets the Amazon url of the passed item.
      * @param jsonItemName the item's name in the database.
      */
-    private getItemUrl(jsonItemName: string) {
+    private getItemUrl(jsonItemName: string): Promise<string> {
         return new Promise((resolve, reject) => {
             this.firebaseDatabase.ref(`tracked-items/${jsonItemName}/url`)
                 .once('value')
