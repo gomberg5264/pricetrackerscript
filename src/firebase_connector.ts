@@ -27,7 +27,7 @@ export default class FirebaseConnector {
      * Appends the price and date (both at the time of execution) to the data tab of the passed item in the database.
      * @param jsonItemName the item's name in the database.
      */
-    public writeItemData(jsonItemName: string) {
+    public writeItemData(jsonItemName: string): Promise<string> {
         return new Promise((resolve, reject) => {
             this.getItemUrl(jsonItemName).then((url: string) => {
                 this.webScraper.fetchItemPrice(url).then((price) => {
