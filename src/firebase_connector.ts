@@ -39,6 +39,33 @@ export default class FirebaseConnector {
         })
     }
 
+    /**
+     * Adds a new item to the list and initialises it's data with the current price.
+     * (since Firebase does not allow to push empty JSON maps :c.)
+     * @param jsonItemName name of the new item.
+     * @param itemUrl the url to the new item.
+     */
+    public addItemToTrackingList(jsonItemName: string, itemUrl: string): Promise<string> {
+        return new Promise((resolve, reject) => {
+            this.getTrackedItems().then((items) => {
+                if (Object.keys(items).includes(jsonItemName)) {
+                    reject('Duplicate item key detected!')
+                    return
+                }
+                this.firebaseDatabase.ref(`tracked-items`).child(jsonItemName)
+                    .child('url').set(itemUrl)
+                    .then(() => resolve('Item has been added to the database successfully!'))
+                    .catch((error) => reject(error))
+                this.writeItemData(jsonItemName)
+                    .then((confirm) => resolve(confirm))
+                    .catch((error) => reject(error))
+            })
+        })
+    }
+
+    /**
+     * Gets all items that have been added to the database.
+     */
     public getTrackedItemKeys(): Promise<string[]> {
         return new Promise((resolve, reject) => {
             this.getTrackedItems()
@@ -47,7 +74,10 @@ export default class FirebaseConnector {
         })
     }
 
-    public getTrackedItems(): Promise<string> {
+    /**
+     * Gets all items that have been added to the database with all their child-properties.
+     */
+    public getTrackedItems(): Promise<object> {
         return new Promise((resolve, reject) => {
             this.firebaseDatabase.ref(`tracked-items`)
                 .once('value')
@@ -60,7 +90,7 @@ export default class FirebaseConnector {
      * Gets the Amazon url of the passed item.
      * @param jsonItemName the item's name in the database.
      */
-    private getItemUrl(jsonItemName: string): Promise<string> {
+    public getItemUrl(jsonItemName: string): Promise<string> {
         return new Promise((resolve, reject) => {
             this.firebaseDatabase.ref(`tracked-items/${jsonItemName}/url`)
                 .once('value')
@@ -68,7 +98,7 @@ export default class FirebaseConnector {
                 .catch((error) => reject(error))
         })
     }
-    
+
     /**
      * Returns the current date in dd-MM-YYYY format.
      * @returns the formatted date.
