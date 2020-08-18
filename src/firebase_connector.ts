@@ -39,6 +39,23 @@ export default class FirebaseConnector {
         })
     }
 
+    public getTrackedItemKeys(): Promise<string[]> {
+        return new Promise((resolve, reject) => {
+            this.getTrackedItems()
+                .then((items) => resolve(Object.keys(items)))
+                .catch((error) => reject(error))
+        })
+    }
+
+    public getTrackedItems(): Promise<string> {
+        return new Promise((resolve, reject) => {
+            this.firebaseDatabase.ref(`tracked-items`)
+                .once('value')
+                .then((snapshot) => resolve(snapshot.val()))
+                .catch((error) => reject(error))
+        })
+    }
+
     /**
      * Gets the Amazon url of the passed item.
      * @param jsonItemName the item's name in the database.
@@ -47,9 +64,7 @@ export default class FirebaseConnector {
         return new Promise((resolve, reject) => {
             this.firebaseDatabase.ref(`tracked-items/${jsonItemName}/url`)
                 .once('value')
-                .then((snapshot) => {
-                    resolve(snapshot.val())
-                })
+                .then((snapshot) => resolve(snapshot.val()))
                 .catch((error) => reject(error))
         })
     }
