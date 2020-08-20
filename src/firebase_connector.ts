@@ -30,7 +30,7 @@ export default class FirebaseConnector {
         return new Promise((resolve, reject) => {
             this.getTrackedItemKeys().then((itemKeys) => {
                 itemKeys.forEach((item) => {
-                    this.getAndAddData(item).then((confirm) => resolve(confirm))
+                    this.getAndAddData(item).then(() => resolve('Data has been added successfully to the database!'))
                 })
             })
             .catch((error) => reject(error))
