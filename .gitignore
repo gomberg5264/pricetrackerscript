@@ -3,7 +3,7 @@ node_modules/
 
 # configuration
 .env
-src/firebase_config.ts
+src/ts/firebase_config.ts
 
 # firebase related
 .firebaserc
@@ -11,3 +11,4 @@ firebase-debug.log
 
 # to js compiled ts
 src/js/
+page/js/

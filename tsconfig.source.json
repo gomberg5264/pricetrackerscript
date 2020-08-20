@@ -1,0 +1,18 @@
+{
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+        "rootDir": "src/ts/",
+        "outDir": "src/js/",
+        "target": "es6",
+        "module": "commonjs",
+        "resolveJsonModule": true,
+        "lib": ["es6", "dom"],
+        "esModuleInterop": true,
+    },
+    "exclude": [
+        "page/**/*.ts"
+    ],
+    "include": [
+        "src/**/*.ts"
+    ],
+}

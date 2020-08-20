@@ -15,8 +15,10 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node src/js/index.js",
+    "build:backend": "tsc -p ./tsconfig.source.json",
+    "start:backend": "node src/js/index.js",
+    "build:frontend": "tsc -p ./tsconfig.page.json",
+    "start:frontend": "node page/js/index.js",
     "dev": "nodemon --watch src/**/*.ts --exec ts-node src/index.ts"
   },
   "keywords": [],

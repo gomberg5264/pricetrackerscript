@@ -1,0 +1,13 @@
+{
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+        "rootDir": "page/ts/",
+        "outDir": "page/js/"
+    },
+    "exclude": [
+        "src/**/*.ts"
+    ],
+    "include": [
+        "page/**/*.ts"
+    ],
+}
