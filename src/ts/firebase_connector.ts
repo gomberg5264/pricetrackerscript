@@ -24,7 +24,7 @@ export default class FirebaseConnector {
     }
     
     /**
-     * Gets the prices of all items in the database and adds it to their data tab.
+     * Gets the current prices of all items in the database and adds it to their data tab.
      */
     public getAndAddDataForAllItems(): Promise<string> {
         return new Promise((resolve, reject) => {

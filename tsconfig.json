@@ -2,8 +2,8 @@
     "compilerOptions": {
       "target": "es6",
       "module": "commonjs",
-      "rootDir": "src",
-      "outDir": "build",
+      "rootDir": "src/ts",
+      "outDir": "src/js",
       "resolveJsonModule": true,
       "lib": ["es6", "dom"],
       "esModuleInterop": true
