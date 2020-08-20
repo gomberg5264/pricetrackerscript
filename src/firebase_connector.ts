@@ -29,12 +29,13 @@ export default class FirebaseConnector {
      * Appends the price and date (both at the time of execution) to the data tab of the passed item in the database.
      * @param jsonItemName the item's name in the database.
      */
-    public writeItemData(jsonItemName: string): Promise<string> {
+    public getAndAddData(jsonItemName: string): Promise<string> {
         return new Promise((resolve, reject) => {
             this.getItemUrl(jsonItemName).then((url: string) => {
                 this.webScraper.fetchItemPrice(url).then((price) => {
-                    this.firebaseDatabase.ref(`tracked-items/${jsonItemName}/data`).child(this.getFormattedDate()).set(price)
-                    resolve('Data successfully saved to database!')
+                    this.firebaseDatabase.ref(`tracked-items/${jsonItemName}/data`)
+                    .child(this.getFormattedDate()).set(price)
+                    .then(() => resolve('Data successfully saved to database!'))
                 })
             })
             .catch((error) => reject(error))
@@ -46,8 +47,6 @@ export default class FirebaseConnector {
      * (since Firebase does not allow to push empty JSON maps :c.)
      * @param jsonItemName name of the new item.
      * @param itemUrl the url to the new item.
-     * 
-     * TODO: Fix the reject-resolve-chaos in this method.
      */
     public addItemToTrackingList(jsonItemName: string, itemUrl: string): Promise<string> {
         return new Promise((resolve, reject) => {
@@ -59,7 +58,7 @@ export default class FirebaseConnector {
                 this.firebaseDatabase.ref(`tracked-items`).child(jsonItemName)
                     .child('url').set(itemUrl)
                     .catch((error) => reject(error))
-                this.writeItemData(jsonItemName)
+                this.getAndAddData(jsonItemName)
                     .then((confirm) => resolve(confirm))
                     .catch((error) => reject(error))
             })
