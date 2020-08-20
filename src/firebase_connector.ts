@@ -23,7 +23,19 @@ export default class FirebaseConnector {
         return FirebaseConnector.instance
     }
     
-    // TODO: Write method that automatically fetches all prices of all items in the database and adds these values to the respective data tabs.
+    /**
+     * Gets the prices of all items in the database and adds it to their data tab.
+     */
+    public getAndAddDataForAllItems(): Promise<string> {
+        return new Promise((resolve, reject) => {
+            this.getTrackedItemKeys().then((itemKeys) => {
+                itemKeys.forEach((item) => {
+                    this.getAndAddData(item).then((confirm) => resolve(confirm))
+                })
+            })
+            .catch((error) => reject(error))
+        })
+    }
 
     /**
      * Appends the price and date (both at the time of execution) to the data tab of the passed item in the database.
