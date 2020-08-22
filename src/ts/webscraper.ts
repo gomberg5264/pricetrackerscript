@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
-import cheerio from 'cheerio'
+import * as cheerio from 'cheerio'
 
 /**
  * Scrapes the price of Amazon items.
@@ -28,14 +28,12 @@ export default class WebScraper {
      */
     public fetchItemPrice(itemURL: string): Promise<string> {
         return new Promise((resolve, reject) => {
-            this.axiosInstance.get(itemURL, { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0' } })
-                .then(
-                    response => {
-                        let $ = cheerio.load(response.data)
-                        let price: Cheerio = $('#priceblock_ourprice')
-                        resolve(price.text())
-                    }
-                )
+            this.axiosInstance.get(itemURL, { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36' } })
+                .then((response) => {
+                    let $ = cheerio.load(response.data)
+                    let price: Cheerio = $('#priceblock_ourprice')
+                    resolve(price.text())
+                })
                 .catch((error) => reject(error))
         })
     }
