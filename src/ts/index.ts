@@ -1,6 +1,4 @@
-import firebase from 'firebase/app'
 import * as admin from 'firebase-admin'
-import { firebaseConfig } from './firebase_config'
 import FirebaseConnector from './firebase_connector'
 import * as serviceAccount from '../../service_account.json'
 
