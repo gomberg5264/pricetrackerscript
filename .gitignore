@@ -10,7 +10,10 @@ service_account.json
 .firebaserc
 firebase-debug.log
 
-
 # to js compiled ts
 src/js/
 page/js/
+
+# compiled sass
+*.css
+*.css.map
