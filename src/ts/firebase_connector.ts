@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import * as admin from 'firebase-admin'
 import WebScraper from './webscraper'
 
 /**
@@ -9,7 +9,7 @@ import WebScraper from './webscraper'
  */
 export default class FirebaseConnector {
     private static instance: FirebaseConnector
-    private firebaseDatabase: firebase.database.Database = firebase.database()
+    private firebaseDatabase: admin.database.Database = admin.database()
     private webScraper: WebScraper = new WebScraper()
 
     constructor() {
