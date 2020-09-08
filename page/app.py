@@ -36,7 +36,7 @@ APP.layout = HTML.Div(
             style = {
                 'textAlign': 'center',
                 'color': colours['text'],
-            }
+            },
         ),
         CORE.Dropdown(
             id = 'dropdown',
@@ -72,8 +72,8 @@ def update_graph_data(dropdown_value: str):
             dict(
                 x = list(FIREBASE_FETCH.get_item_data(dropdown_value).keys()),
                 y = sorted(y_values)
-            )
-        ]
+            ),
+        ],
     }
 
 if __name__ == '__main__':

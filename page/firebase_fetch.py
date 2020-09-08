@@ -16,7 +16,7 @@ class FireBaseFetch:
         '''Fetches the names of all tracked items.'''
         return self.__firebase_database.reference(f'tracked-items/').get().keys()
 
-firebase_admin.initialize_app(credentials.Certificate('./service_account.json'), {
+firebase_admin.initialize_app(credentials.Certificate('page/service_account.json'), {
     'databaseURL': 'https://bot-olaus.firebaseio.com/'
 })
 
