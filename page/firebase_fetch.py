@@ -16,7 +16,7 @@ class FireBaseFetch:
         })
         self.__firebase_database = database
 
-    def get_instance(self):
+    def get_instance(self) -> FireBaseFetch:
         return FireBaseFetch.__instance
 
     def get_item_data(self, json_item_name: str) -> Dict[str, str]: 
