@@ -15,9 +15,6 @@ colours = {
 }
 
 APP.layout = HTML.Div(
-    style = {
-        'backgroundColor': colours['background'],
-    },
     children = [
         HTML.H1(
             id = 'title',
@@ -45,17 +42,18 @@ APP.layout = HTML.Div(
             options = [
                 {'label': label, 'value': label} for label in FIREBASE_FETCH.get_tracked_item_keys()
             ],
+            style = {
+                'width': '50%',
+                'margin': '0 auto',
+            },
         ),
         CORE.Graph(
             id = 'price_history_graph',
             figure = {
-                'layout': {
-                    'plot_bgcolor': colours['background'],
-                    'paper_bgcolor': colours['background'],
-                    'font': {
-                        'color': colours['text'],
-                    },
-                },
+                
+            },
+            style = {
+                'marginTop': '20px',
             },
         ),
     ],
@@ -71,9 +69,16 @@ def update_graph_data(dropdown_value: str):
         'data': [
             dict(
                 x = list(FIREBASE_FETCH.get_item_data(dropdown_value).keys()),
-                y = sorted(y_values)
+                y = y_values,
             ),
         ],
+        'layout': dict(
+            plot_bgcolor = colours['background'],
+            paper_bgcolor = colours['background'],
+            font = dict(
+                color = colours['text'],
+            ),
+        ),
     }
 
 if __name__ == '__main__':
