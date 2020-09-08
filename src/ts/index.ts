@@ -1,6 +1,6 @@
 import * as admin from 'firebase-admin'
 import FirebaseConnector from './firebase_connector'
-import * as serviceAccount from '../../service_account.json'
+import * as serviceAccount from './service_account.json'
 
 admin.initializeApp({
     //@ts-ignore

@@ -2,7 +2,8 @@
     "extends": "./tsconfig.base.json",
     "compilerOptions": {
         "rootDir": "page/ts/",
-        "outDir": "page/js/"
+        "outDir": "page/js/",
+        "removeComments": true
     },
     "exclude": [
         "src/**/*.ts"
