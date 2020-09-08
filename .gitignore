@@ -17,3 +17,6 @@ page/js/
 # compiled sass
 *.css
 *.css.map
+
+# python bytecode
+*/**/__pycache__/
