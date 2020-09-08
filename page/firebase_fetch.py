@@ -5,8 +5,19 @@ from firebase_admin import db as database
 
 class FireBaseFetch:
     '''Fetches item data from Firebase's realtime database.'''
+    __instance = None
+
     def __init__(self):
+        if FireBaseFetch.__instance != None:
+            raise Exception('FirebaseFetch has already been instantiated!')
+        FireBaseFetch.__instance = self
+        firebase_admin.initialize_app(credentials.Certificate('./service_account.json'), {
+            'databaseURL': 'https://bot-olaus.firebaseio.com/'
+        })
         self.__firebase_database = database
+
+    def get_instance(self):
+        return FireBaseFetch.__instance
 
     def get_item_data(self, json_item_name: str) -> Dict[str, str]: 
         '''Fetches stored data of the passed item'''
@@ -15,12 +26,3 @@ class FireBaseFetch:
     def get_tracked_item_keys(self) -> List[str]:
         '''Fetches the names of all tracked items.'''
         return self.__firebase_database.reference(f'tracked-items/').get().keys()
-
-firebase_admin.initialize_app(credentials.Certificate('page/service_account.json'), {
-    'databaseURL': 'https://bot-olaus.firebaseio.com/'
-})
-
-firebase_fetch = FireBaseFetch()
-# print(list(firebase_fetch.get_item_data('samsung-ultrawide-gaming-monitor').keys()))
-# print(firebase_fetch.get_tracked_item_keys())
-# print(list(firebase_fetch.get_item_data('samsung-ultrawide-gaming-monitor').values()))

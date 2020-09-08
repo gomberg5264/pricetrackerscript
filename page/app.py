@@ -29,7 +29,7 @@ APP.layout = HTML.Div(
         ),
         HTML.H3(
             id = 'heading',
-            children = 'YOUR TRUSTWORTHY AMAZON PRICE TRACKER!🤖📊',
+            children = 'YOUR TRUSTWORTHY AMAZON PRICE TRACKER OF CHOICE!🤖📊',
             style = {
                 'textAlign': 'center',
                 'color': colours['text'],
@@ -38,9 +38,9 @@ APP.layout = HTML.Div(
         CORE.Dropdown(
             id = 'dropdown',
             placeholder = 'Select tracked item',
-            value = list(FIREBASE_FETCH.get_tracked_item_keys())[0],
+            value = list(FIREBASE_FETCH.get_instance().get_tracked_item_keys())[0],
             options = [
-                {'label': label, 'value': label} for label in FIREBASE_FETCH.get_tracked_item_keys()
+                {'label': label, 'value': label} for label in FIREBASE_FETCH.get_instance().get_tracked_item_keys()
             ],
             style = {
                 'width': '50%',
@@ -62,13 +62,13 @@ APP.layout = HTML.Div(
 @APP.callback(Output('price_history_graph', 'figure'), Input('dropdown', 'value'))
 def update_graph_data(dropdown_value: str):
     y_values = []
-    for value in list(FIREBASE_FETCH.get_item_data(dropdown_value).values()):
+    for value in list(FIREBASE_FETCH.get_instance().get_item_data(dropdown_value).values()):
         y_values.append(float(unicodedata.normalize('NFKD', value).replace('.', '').replace(',', '.').split()[0]))
 
     return {
         'data': [
             dict(
-                x = list(FIREBASE_FETCH.get_item_data(dropdown_value).keys()),
+                x = list(FIREBASE_FETCH.get_instance().get_item_data(dropdown_value).keys()),
                 y = y_values,
             ),
         ],
