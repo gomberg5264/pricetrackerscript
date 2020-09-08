@@ -66,8 +66,6 @@ def update_graph_data(dropdown_value: str):
     y_values = []
     for value in list(FIREBASE_FETCH.get_item_data(dropdown_value).values()):
         y_values.append(float(unicodedata.normalize('NFKD', value).replace('.', '').replace(',', '.').split()[0]))
-    
-    print(sorted(y_values))
 
     return {
         'data': [
