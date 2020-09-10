@@ -32,7 +32,7 @@ export default class WebScraper {
                 .then((response) => {
                     let $ = cheerio.load(response.data)
                     let price: Cheerio = $('#priceblock_ourprice')
-                    resolve(price.text() != '' ? price.text() : '00,00 €')
+                    resolve(price.text() !== '' ? price.text() : '00,00 €')
                 })
                 .catch((error) => reject(error))
         })
