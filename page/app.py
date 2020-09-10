@@ -82,10 +82,17 @@ def update_graph_data(dropdown_value: str):
             ),
         ],
         'layout': dict(
+            title = 'Price history of the selected item.',
             plot_bgcolor = colours['background'],
             paper_bgcolor = colours['background'],
             font = dict(
                 color = colours['text'],
+            ),
+            xaxis = dict(
+                title = 'Date'
+            ),
+            yaxis = dict(
+                title = 'Price'
             ),
         ),
     }
