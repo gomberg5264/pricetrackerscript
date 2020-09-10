@@ -14,11 +14,12 @@ colours = {
     'text': '#FFFFFF',
 }
 
+APP.title = 'BOT-OLAUS - AMAZON PRICE TRACKER'
 APP.layout = HTML.Div(
     children = [
         HTML.H1(
             id = 'title',
-            children = 'BOT-OLAUS ',
+            children = 'BOT-OLAUS',
             style = {
                 'textAlign': 'center',
                 'color': colours['text'],
@@ -54,6 +55,14 @@ APP.layout = HTML.Div(
             },
             style = {
                 'marginTop': '20px',
+            },
+        ),
+        HTML.H5(
+            id = '',
+            children = '(A value of 0 means that the item is currently unavailable and therefore no price listed.)',
+            style = {
+                'textAlign': 'center',
+                'color': colours['text'],
             },
         ),
     ],
