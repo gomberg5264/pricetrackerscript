@@ -114,11 +114,11 @@ export default class FirebaseConnector {
     }
 
     /**
-     * Returns the current date in dd-MM-YYYY format.
+     * Returns the current date in YYYY-MM-dd format.
      * @returns the formatted date.
      */
     private getFormattedDate(): string {
         const date = new Date()
-        return [date.getFullYear(), date.getMonth() + 1, date.getDate()].join('-')
+        return [date.getFullYear(), ('0' + (date.getMonth() + 1)).slice(-2), ('0' + date.getDate()).slice(-2)].join('-')
     }
 }
