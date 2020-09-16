@@ -1,5 +1,16 @@
 {
   "hosting": {
-      "public": "page"
-  }
+    "public": "",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  "rewrites": [{
+      "source": "**",
+      "run": {
+          "serviceId": "dash"
+      }
+  }]
 }

@@ -23,7 +23,7 @@ APP.layout = HTML.Div(
             style = {
                 'textAlign': 'center',
                 'color': colours['text'],
-                'fontSize': '50px',
+                'fontSize': '50px', 
                 'fontWeight': 'bold',
                 'letterSpacing': '10px',
             },
@@ -82,7 +82,7 @@ def update_graph_data(dropdown_value: str):
             ),
         ],
         'layout': dict(
-            title = 'Price history of the selected item.',
+            title = f'Price history of [{dropdown_value}]',
             plot_bgcolor = colours['background'],
             paper_bgcolor = colours['background'],
             font = dict(
@@ -98,4 +98,4 @@ def update_graph_data(dropdown_value: str):
     }
 
 if __name__ == '__main__':
-    APP.run_server(debug = True)
+    APP.run_server(port = 8080, debug = True)
