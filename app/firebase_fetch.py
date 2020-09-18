@@ -1,3 +1,6 @@
+import os
+from pathlib import Path
+from dotenv import load_dotenv
 from typing import List, Dict
 import firebase_admin
 from firebase_admin import credentials
@@ -11,7 +14,8 @@ class FireBaseFetch:
         if FireBaseFetch.__instance != None:
             raise Exception('FirebaseFetch has already been instantiated!')
         FireBaseFetch.__instance = self
-        firebase_admin.initialize_app(credentials.Certificate('C:/Users/Nicolaus Rossi/WebStormProjects/bot-olaus/server/service_account.json'), {
+        load_dotenv(dotenv_path = Path('.') / '.env')
+        firebase_admin.initialize_app(credentials.Certificate(os.getenv('SERVICE_ACCOUNT')), {
             'databaseURL': 'https://bot-olaus.firebaseio.com/'
         })
         self.__firebase_database = database
