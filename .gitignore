@@ -3,7 +3,7 @@ node_modules/
 
 # configuration
 .env
-src/ts/firebase_config.ts
+server/ts/firebase_config.ts
 service_account.json
 
 # firebase related
@@ -11,9 +11,7 @@ service_account.json
 firebase-debug.log
 
 # to js compiled ts
-src/js/
-page/js/
-
+server/js/*
 # compiled sass
 *.css
 *.css.map

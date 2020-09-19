@@ -9,17 +9,15 @@
     "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
-    "firebase": "^7.18.0",
+    "firebase": "^7.21.0",
     "firebase-admin": "^9.1.1",
     "telegraf": "^3.38.0",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "build:backend": "tsc -p ./tsconfig.source.json",
-    "start:backend": "node src/js/index.js",
-    "build:frontend": "tsc -p ./tsconfig.page.json",
-    "start:frontend": "node page/js/index.js"
+    "build:backend": "tsc -p ./tsconfig.server.json",
+    "start:backend": "node src/js/index.js"
   },
   "keywords": [],
   "author": "",

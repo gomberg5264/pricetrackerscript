@@ -1,15 +1,15 @@
 {
     "extends": "./tsconfig.base.json",
     "compilerOptions": {
-        "rootDirs": ["./src/ts", "."],
-        "outDir": "./src/js/"
+        "rootDirs": ["./server/ts", "."],
+        "outDir": "./server/js/"
     },
     "exclude": [
-        "page/**/*.ts",
+        "app/**/*.ts",
         "tsconfig.page.json"
     ],
     "include": [
-        "src/**/*.ts",
+        "server/**/*.ts",
         "service_account.json"
     ],
 }
