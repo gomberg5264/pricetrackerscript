@@ -6,18 +6,24 @@
   "dependencies": {
     "@types/axios": "^0.14.0",
     "@types/cheerio": "^0.22.21",
+    "@types/express": "^4.17.8",
+    "@types/node": "^14.11.1",
     "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "firebase": "^7.21.0",
     "firebase-admin": "^9.1.1",
+    "node": "^14.11.0",
+    "path": "^0.12.7",
     "telegraf": "^3.38.0",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "build:backend": "tsc -p ./tsconfig.server.json",
-    "start:backend": "node src/js/index.js"
+    "build:server": "tsc -p ./tsconfig.server.json",
+    "start:server": "node server/js/index.js",
+    "start:app": "py app/app.py"
   },
   "keywords": [],
   "author": "",
