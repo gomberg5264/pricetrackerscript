@@ -21,15 +21,15 @@ const formattedTimeStamp: Function = () => {
 }
 
 const processLogMessage: Function = (statusMessage) => {
-    let logMessage = `[server]: ${formattedTimeStamp()}\t-->\t${statusMessage}`
+    return `[server]: ${formattedTimeStamp()}\t-->\t${statusMessage}`
 }
 
 APP.listen(SERVER_PORT, () => { 
     console.log(`[server]: Server now running at https://localhost:${SERVER_PORT}\n`)
     FirebaseConnector.getInstance().getAndAddDataForAllItems()
-        .then((confirm) => processLogMessage(confirm))
+        .then((confirm) => console.log(processLogMessage(confirm)))
     setInterval(() => {
         FirebaseConnector.getInstance().getAndAddDataForAllItems()
-            .then((confirm) => processLogMessage(confirm))
+            .then((confirm) => console.log(processLogMessage(confirm)))
     }, ONE_DAY)
 })  
