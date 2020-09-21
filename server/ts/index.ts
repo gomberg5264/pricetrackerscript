@@ -1,5 +1,6 @@
 import express from 'express'
 import * as admin from 'firebase-admin'
+import { Expression } from 'typescript'
 import FirebaseConnector from './firebase_connector'
 import * as serviceAccount from './service_account.json'
 
@@ -10,7 +11,8 @@ admin.initializeApp({
 })
 
 const APP: express.Application = express()
-const SERVER_PORT: Number = 8081
+const SERVER_PORT: number = 8081
+const ONE_DAY: number = 86400000
 const firebaseConnector: FirebaseConnector = new FirebaseConnector()
 
 const formattedTimeStamp: Function = () => {
@@ -20,11 +22,8 @@ const formattedTimeStamp: Function = () => {
 
 const processLogMessage: Function = (statusMessage) => {
     let logMessage = `[server]: ${formattedTimeStamp()}\t-->\t${statusMessage}`
-    document.getElementById('scroll-view-list').appendChild(document.createElement('li').appendChild(document.createTextNode(logMessage)))
-    console.log(logMessage)
 }
 
-APP.get('/', (req, res) => res.render('index.html', { root: 'server/templates' }))
 APP.listen(SERVER_PORT, () => { 
     console.log(`[server]: Server now running at https://localhost:${SERVER_PORT}\n`)
     FirebaseConnector.getInstance().getAndAddDataForAllItems()
@@ -32,5 +31,5 @@ APP.listen(SERVER_PORT, () => {
     setInterval(() => {
         FirebaseConnector.getInstance().getAndAddDataForAllItems()
             .then((confirm) => processLogMessage(confirm))
-    }, 3000)
-})
+    }, ONE_DAY)
+})  
