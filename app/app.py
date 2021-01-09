@@ -72,11 +72,11 @@ APP.layout = HTML.Div(
 def update_graph_data(dropdown_value: str):
     y_values = []
     for value in list(FIREBASE_FETCH.get_instance().get_item_data(dropdown_value).values()):
-        # y_values.append(float(unicodedata.normalize('NFKD', value).replace('.', '').replace(',', '.').replace('€', '').split()[0]))
-        
         value = value.replace('€', '').strip()
+        # English number format
         if value[-3] == '.':
             y_values.append(value.replace(',', ''))
+        # Austrian / German number format
         else:
             y_values.append(value.replace('.', '').replace(',', '.'))
 
