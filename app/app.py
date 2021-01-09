@@ -72,7 +72,14 @@ APP.layout = HTML.Div(
 def update_graph_data(dropdown_value: str):
     y_values = []
     for value in list(FIREBASE_FETCH.get_instance().get_item_data(dropdown_value).values()):
-        y_values.append(float(unicodedata.normalize('NFKD', value).replace('.', '').replace(',', '.').split()[0]))
+        # y_values.append(float(unicodedata.normalize('NFKD', value).replace('.', '').replace(',', '.').replace('€', '').split()[0]))
+        
+        value = value.replace('€', '').strip()
+        if value[-3] == '.':
+            y_values.append(value.replace(',', ''))
+        else:
+            y_values.append(value.replace('.', '').replace(',', '.'))
+
 
     return {
         'data': [
@@ -98,4 +105,4 @@ def update_graph_data(dropdown_value: str):
     }
 
 if __name__ == '__main__':
-    APP.run_server(port = 8080, debug = True)
+    APP.run_server(host = '0.0.0.0', port = 8080, debug = True)
